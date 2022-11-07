@@ -2,6 +2,7 @@
 #include <chrono>
 #include <algorithm>
 #include <iterator>
+#include <chrono>
 
 using namespace std;
 
@@ -143,36 +144,62 @@ void show(int* arr, int length) {
 int main() {
 	setlocale(0, "RUS");
 
-	int const length = 10;
+	int const length = 1000;
 	int arr[length];
 	int temp_arr[length];
 	for (int i = 0; i < length; i++) {
-		arr[i] = rand() % 100;
-		cout << arr[i] << ' ';
+		//arr[i] = rand() % 100;
+		//cout << arr[i] << ' ';
+		cin >> arr[i];
 	}
 	cout << endl << endl;
 
 	copy(begin(arr), end(arr), begin(temp_arr));
+	auto start = chrono::high_resolution_clock::now();
 	InsertionSort(temp_arr, length);
-	show(temp_arr, length);
+	auto stop = chrono::high_resolution_clock::now();
+	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << "Сортировка вставками " << duration.count() << endl;
 
 	copy(begin(arr), end(arr), begin(temp_arr));
+	start = chrono::high_resolution_clock::now();
 	SelectionSort(temp_arr, length);
-	show(temp_arr, length);
+	stop = chrono::high_resolution_clock::now();
+	duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << "Сортировка выбором " << duration.count() << endl;
 
 	copy(begin(arr), end(arr), begin(temp_arr));
+	start = chrono::high_resolution_clock::now();
 	BubbleSort(temp_arr, length);
-	show(temp_arr, length);
+	stop = chrono::high_resolution_clock::now();
+	duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << "Сортировка пузырьком " << duration.count() << endl;
 
 	copy(begin(arr), end(arr), begin(temp_arr));
+	start = chrono::high_resolution_clock::now();
 	MergeSort(temp_arr, 0, length - 1);
-	show(temp_arr, length);
+	stop = chrono::high_resolution_clock::now();
+	duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << "Сортировка слиянием " << duration.count() << endl;
 
 	copy(begin(arr), end(arr), begin(temp_arr));
+	start = chrono::high_resolution_clock::now();
 	ShellSort(temp_arr, length);
-	show(temp_arr, length);
+	stop = chrono::high_resolution_clock::now();
+	duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << "Сортировка Шелла " << duration.count() << endl;
 
 	copy(begin(arr), end(arr), begin(temp_arr));
+	start = chrono::high_resolution_clock::now();
 	QuickSort(temp_arr, 0, length - 1);
-	show(temp_arr, length);
+	stop = chrono::high_resolution_clock::now();
+	duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << "Быстрая сортировка " << duration.count() << endl;
+
+	copy(begin(arr), end(arr), begin(temp_arr));
+	start = chrono::high_resolution_clock::now();
+	sort(begin(temp_arr), end(temp_arr));
+	stop = chrono::high_resolution_clock::now();
+	duration = chrono::duration_cast<chrono::microseconds>(stop - start);
+	cout << "Сортировка встроенная " << duration.count() << endl;
 }
